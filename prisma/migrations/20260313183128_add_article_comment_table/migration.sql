@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "ArticleCommetn" ALTER COLUMN "userID" DROP NOT NULL,
+ALTER COLUMN "replay" DROP NOT NULL;

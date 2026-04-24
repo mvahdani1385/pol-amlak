@@ -1,0 +1,51 @@
+/* TipTap Editor Custom Styles */
+.ProseMirror.description {
+    margin-top: 20px;
+    padding: 0 10px;
+    transition: all .5s;
+}
+
+.ProseMirror.description h2 {
+    font-size: 30px !important;
+    margin-top: 10px !important;
+}
+
+.ProseMirror.description h3 {
+    font-size: 25px !important;
+}
+
+.ProseMirror.description h4 {
+    font-size: 20px !important;
+}
+
+.ProseMirror.description p {
+    font-size: 17px !important;
+    text-align: justify !important;
+}
+
+.ProseMirror.description a {
+    color: var(--title) !important;
+}
+
+/* Override prose styles for TipTap */
+.ProseMirror.prose h2 {
+    font-size: 30px !important;
+    margin-top: 10px !important;
+}
+
+.ProseMirror.prose h3 {
+    font-size: 25px !important;
+}
+
+.ProseMirror.prose h4 {
+    font-size: 20px !important;
+}
+
+.ProseMirror.prose p {
+    font-size: 17px !important;
+    text-align: justify !important;
+}
+
+.ProseMirror.prose a {
+    color: var(--title) !important;
+}

@@ -1,0 +1,70 @@
+.Toastify__toast-container{
+    padding: 10px;
+    z-index: 999999999999999999999999999999999999;
+}
+
+.Toastify__toast{
+    padding: 30px;
+    font-family: modam;
+}
+
+div:where(.swal2-container).swal2-center>.swal2-popup {
+    grid-column: 2;
+    grid-row: 2;
+    place-self: center center;
+    box-shadow: var(--blackshadow);
+    border-radius: 20px;
+    border: 2px solid var(--title);
+    background-color: var(--lightboxback);
+    backdrop-filter: blur(40px);
+}
+
+div:where(.swal2-container) h2:where(.swal2-title) , div:where(.swal2-container) div:where(.swal2-html-container){
+    color: var(--foreground) !important;
+    /* color: var(--background) !important; */
+}
+
+div:where(.swal2-icon).swal2-warning, div:where(.swal2-icon).swal2-question{
+    border-color: var(--title) !important;
+    color: var(--title) !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):not([disabled]){
+    border-radius: 999px !important;
+    padding: 0px 30px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid;
+    transition: all .3s;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel){
+    color: red !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel):hover{
+    background-color: var(--foreground) !important;
+    border-color: var(--foreground);
+    color: red !important;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm):hover {
+    background-color: transparent !important;
+    color: var(--title) !important;
+}
+
+div:where(.swal2-container) .swal2-input{
+    border-radius: 10px;
+    outline: none !important;
+    border: 1px solid var(--title);
+    text-align: left;
+    color: var(--foreground);
+}
+
+div:where(.swal2-container) .swal2-input:focus{
+    outline: none !important;
+}
+
+div:where(.swal2-container) label:where(.swal2-input-label){
+    color: var(--foreground);
+}

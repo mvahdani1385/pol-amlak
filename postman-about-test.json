@@ -1,0 +1,31 @@
+{
+  "aboutData": {
+    "title": "amlaq pal",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "video": "1775011631088.mp4",
+    "poster": "1773253562874.jpg",
+    "services": [
+      {
+        "img": "ruls.png",
+        "name": "Trusted by thousands",
+        "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+      },
+      {
+        "img": "loca.png",
+        "name": "Wide range of properties",
+        "desc": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+      },
+      {
+        "img": "room.png",
+        "name": "Easy financing",
+        "desc": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+      }
+    ],
+    "ourteem": [
+      { "img": "teem1.png", "name": "Karim Bagheri", "position": "CEO" },
+      { "img": "teem2.jpg", "name": "Ziba Hosseini", "position": "Sales Manager" },
+      { "img": "teem3.jpg", "name": "Sajad Ashouri", "position": "Commercial Secretary" },
+      { "img": "teem4.jpg", "name": "Ilya Monfared", "position": "Digital Marketing Manager" }
+    ]
+  }
+}

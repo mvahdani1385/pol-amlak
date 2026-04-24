@@ -1,0 +1,182 @@
+.content .datainfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10;
+}
+
+.content .datainfo .databox {
+    width: 235px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--blackshadow);
+    background-color: var(--inputback);
+    padding: 0 15px;
+}
+
+.content .datainfo button {
+    width: 235px;
+    height: 70px;
+}
+
+
+.content .datainfo .databox .data {
+    color: var(--title);
+}
+
+.content section .sectitle {
+    position: relative;
+    font-weight: 600;
+    font-size: 22px;
+    padding-right: 45px;
+    color: var(--title);
+}
+
+.content section {
+    margin-top: 50px;
+}
+
+.content section:first-child {
+    margin-top: 0px;
+}
+
+.content section:nth-child(3) {
+    margin-top: 90px;
+}
+
+.content section .sectitle::after {
+    position: absolute;
+    content: '';
+    width: 35px;
+    height: 35px;
+    top: -2;
+    right: 0;
+    border-radius: 10px;
+    border: 3px solid var(--title);
+}
+
+.content .allFeatures {
+    width: 100%;
+    padding-top: 30px;
+    gap: .8%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content .allFeatures .featurebox {
+    width: 16%;
+    height: 70px;
+    gap: 5;
+    margin-top: 5px;
+    flex-direction: column;
+    border-bottom: 1px solid;
+}
+
+.content .allFeatures .featurebox.has {
+    color: var(--title);
+}
+
+.content .allFeatures .btn {
+    width: 100%;
+    height: 120px;
+    margin-top: -120px;
+    background: linear-gradient(0deg, var(--background), transparent);
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.content .allFeatures .btn button {
+    width: 150px;
+    height: 0;
+    margin-bottom: -20px;
+}
+
+.content .description {
+    margin-top: 20px;
+    padding: 0 10px;
+    height: 300px;
+    transition: all .5s;
+}
+
+.content .description.seeMore {
+    height: fit-content;
+}
+
+.content .see {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.content .description h2 {
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.content .description h3 {
+    font-size: 25px;
+}
+
+.content .description h4 {
+    font-size: 20px;
+}
+
+.content .description p {
+    font-size: 17px;
+    text-align: justify;
+}
+
+.content .description a {
+    color: var(--title);
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .content section:first-child {
+        margin-top: 30px;
+    }
+
+    .content .datainfo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15;
+    }
+
+    .content .datainfo .databox {
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--blackshadow);
+        background-color: var(--inputback);
+        padding: 0 15px;
+    }
+
+    .content .datainfo button {
+        width: 100%;
+        height: 70px;
+    }
+
+    .content .allFeatures {
+        width: 100%;
+        padding-top: 30px;
+        gap: 1%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content .allFeatures .featurebox {
+        width: 32%;
+        height: 70px;
+        gap: 5;
+        margin-top: 5px;
+        font-size: 14px;
+        flex-direction: column;
+        border-bottom: 1px solid;
+    }
+}

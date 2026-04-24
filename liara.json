@@ -1,0 +1,15 @@
+{
+  "port": 3000,
+  "platform": "next",
+  "app": "pol-amlak",
+  "build": {
+    "location": "iran"
+  },
+  "next": {
+    "nodeVersion": "22",
+    "mirror": false
+  },
+  "env": {
+    "NEXT_DISABLE_TYPECHECK": "true"
+  }
+}

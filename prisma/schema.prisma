@@ -1,0 +1,328 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Property {
+  id                      Int                  @id @default(autoincrement())
+  title                   String
+  slug                    String               @unique
+  description             String?
+  ownerName               String?
+  ownerMobile             String?
+  ownerPhone              String?
+  guardName               String?
+  guardPhone              String?
+  propertyType            String
+  dealType                String
+  status                  String               @default("active")
+  occupancyStatus         String?
+  isConvertible           Boolean?
+  isFeatured              Boolean              @default(false)
+  price                   BigInt?
+  meterPrice              BigInt?
+  depositPrice            BigInt?
+  rentPrice               BigInt?
+  pricePerMeter           BigInt?
+  province                String?
+  city                    String?
+  district                String?
+  address                 String?
+  postalCode              String?
+  latitude                Float?
+  longitude               Float?
+  viewCount               Int                  @default(0)
+  createYear              BigInt?
+  statusfile              String?
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @updatedAt
+  bathroomFeatures        String[]
+  buildingFacade          String?
+  commonAreas             String[]
+  floorCovering           String?
+  heatingCooling          String[]
+  kitchenFeatures         String[]
+  otherFeatures           String[]
+  parkingTypes            String[]
+  parkingnum              String?
+  propertySpecs           String[]
+  utilities               String[]
+  wallCeiling             String[]
+  allUnit                 String?
+  landArea                BigInt?
+  buildingArea            BigInt?
+  floor                   String?
+  propertyFloors          String?
+  propertyUnit            String?
+  propertydirection       String?
+  roomNumber              String?
+  unitInFloor             String?
+  categoryTitle           String?
+  seoTitle                String?
+  seoMeta                 String?
+  seoCanonikalOrigin      String?
+  seoCanonikalDestination String?
+  seoOrigin               String?
+  seoDestination          String?
+  seoRedirect             String?
+  fieldValues             PropertyFieldValue[]
+  images                  PropertyImage[]
+}
+
+model PropertyImage {
+  id         Int      @id @default(autoincrement())
+  propertyId Int
+  imageUrl   String
+  isMain     Boolean  @default(false)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
+
+model PropertyField {
+  id                 Int                   @id @default(autoincrement())
+  title              String
+  type               String
+  propertyType       String?
+  isRequired         Boolean               @default(false)
+  isFilterable       Boolean               @default(false)
+  createdAt          DateTime              @default(now())
+  dealTypeConditions String?
+  options            PropertyFieldOption[]
+  values             PropertyFieldValue[]
+}
+
+model PropertyFieldOption {
+  id      Int           @id @default(autoincrement())
+  fieldId Int
+  label   String
+  value   String
+  field   PropertyField @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+}
+
+model PropertyFieldValue {
+  id         Int           @id @default(autoincrement())
+  propertyId Int
+  fieldId    Int
+  value      String
+  field      PropertyField @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  property   Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
+
+model SiteSettings {
+  id            Int          @id @default(autoincrement())
+  businessTitle String?
+  slogan        String?
+  logoHeader    String?
+  logoFooter    String?
+  copyrightText String?
+  footerText    String?
+  phone         String?
+  email         String?
+  address       String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  socialLinks   SocialLink[]
+}
+
+model SocialLink {
+  id        Int          @id @default(autoincrement())
+  siteId    Int
+  platform  String
+  iconUrl   String?
+  link      String
+  createdAt DateTime     @default(now())
+  site      SiteSettings @relation(fields: [siteId], references: [id], onDelete: Cascade)
+}
+
+model FilesCategory {
+  id                      Int      @id @default(autoincrement())
+  title                   String
+  slug                    String   @unique
+  description             String?
+  imageUrl                String?
+  seoTitle                String?
+  seoMeta                 String?
+  seoCanonikalOrigin      String?
+  seoCanonikalDestination String?
+  indexed                 String   @default("false")
+  seoOrigin               String?
+  seoDestination          String?
+  seoRedirect             String   @default("301")
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+}
+
+model Certificate {
+  id        Int      @id @default(autoincrement())
+  title     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+}
+
+model AboutPage {
+  id        Int          @id @default(autoincrement())
+  title     String?
+  bio       String?
+  videoUrl  String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  services  Service[]
+  team      TeamMember[]
+}
+
+model Service {
+  id          Int       @id @default(autoincrement())
+  aboutPageId Int
+  title       String
+  description String?
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  aboutPage   AboutPage @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
+}
+
+model TeamMember {
+  id          Int       @id @default(autoincrement())
+  aboutPageId Int
+  name        String
+  position    String?
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  aboutPage   AboutPage @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
+}
+
+model ContactPage {
+  id              Int      @id @default(autoincrement())
+  title           String?
+  UnderTitle      String?
+  description     String?
+  formDescription String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Article {
+  id                      Int      @id @default(autoincrement())
+  title                   String
+  content                 String
+  coverImage              String?
+  categories              String[]
+  active                  Boolean  @default(false)
+  redirect                String   @default("")
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  published               Boolean  @default(false)
+  slug                    String?  @unique
+  seoTitle                String
+  seoMeta                 String
+  seoCanonikalOrigin      String
+  seoCanonikalDestination String
+  seoOrigin               String
+  seoDestination          String
+  seoRedirect             String
+}
+
+model ArticlesCategories {
+  id                      Int      @id @default(autoincrement())
+  name                    String
+  slug                    String   @unique
+  description             String
+  seoTitle                String
+  seoMeta                 String
+  seoCanonikalOrigin      String
+  seoCanonikalDestination String
+  indexed                 String
+  seoOrigin               String
+  seoDestination          String
+  seoRedirect             String
+  createdAt               DateTime @default(now())
+}
+
+model ArticleCommetn {
+  id          Int      @id @default(autoincrement())
+  userID      Int?
+  articleId   Int
+  user        String[]
+  comment     String
+  replay      String?
+  verify      Boolean  @default(false)
+  articleSlug String   @default("")
+  createdAt   DateTime @default(now())
+}
+
+model Applicant {
+  id                      Int      @id @default(autoincrement())
+  title                   String
+  slug                    String   @unique
+  description             String?
+  fullName                String?
+  mobile                  String?
+  phone                   String?
+  email                   String?
+  propertyType            String
+  dealType                String
+  status                  String   @default("active")
+  budgetMin               BigInt?
+  budgetMax               BigInt?
+  province                String?
+  city                    String?
+  district                String?
+  address                 String?
+  postalCode              String?
+  latitude                Float?
+  longitude               Float?
+  viewCount               Int      @default(0)
+  minLandArea             BigInt?
+  maxLandArea             BigInt?
+  minBuildingArea         BigInt?
+  maxBuildingArea         BigInt?
+  minRoomNumber           Int?
+  maxRoomNumber           Int?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  buildingFacade          String[]
+  floorCovering           String[]
+  commonAreas             String[]
+  heatingCooling          String[]
+  kitchenFeatures         String[]
+  otherFeatures           String[]
+  parkingTypes            String[]
+  propertySpecs           String[]
+  utilities               String[]
+  wallCeiling             String[]
+  categoryTitle           String?
+  propertydirection       String?
+  propertyUnit            String?
+  propertyFloors          String?
+  floor                   String?
+  unitInFloor             String?
+  allUnit                 String?
+  seoTitle                String?
+  seoMeta                 String?
+  seoCanonikalOrigin      String?
+  seoCanonikalDestination String?
+  seoOrigin               String?
+  seoDestination          String?
+  seoRedirect             String?
+}
+
+model DynamicOptions {
+  id           Int      @id @default(autoincrement())
+  Province     String
+  city         String[]
+  logo         String?  @default("logo.webp")
+  siteName     String?  @default("املاک پل")
+  siteTarget   String?  @default("بزرگترین املاک لنجان و مبارکه")
+  sitePhone    String?  @default("09932169402")
+  siteEmail    String?  @default("pol@info.com")
+  address      String?  @default("ایران - اصفحان - مبارکه")
+  coptright    String?  @default("تمامی حقوق مادی و معنوی این وبسایت متعلق به پل است")
+  footerText   String?  @default("لورم ایپسوم و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه وجود طراحی اساسا مورد استفاده قرار گیرد.")
+  certificates Json[]
+  ContactPage  String?
+  aboutPage    String?
+}
