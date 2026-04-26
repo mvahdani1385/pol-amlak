@@ -11,8 +11,8 @@ async function getArticleData(slug: string) {
   if (!slug) {
     throw new Error("slug is missing");
   }
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_UR}/api/articles/${slug}`, {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URLL;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles/${slug}`, {
     cache: "no-store",
   });
 
@@ -27,8 +27,8 @@ async function getArticleData(slug: string) {
 }
 
 async function getCommentData() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_UR}/api/comments`, {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URLL || "http://localhost:3000";
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
     cache: "no-store",
   });
 
@@ -49,10 +49,10 @@ async function getAllArticles(props: any) {
 
   const article = await getArticleData(slug);
   const categories = article.categories;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URLL || "http://localhost:3000";
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_UR}/api/articles`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles`);
     if (!response.ok) throw new Error('Failed to fetch articles');
 
     const allArticles = await response.json();
@@ -83,10 +83,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       };
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_API_URLL || "http://localhost:3000";
     console.log('Fetching article for metadata:', slug);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_UR}/api/articles/${slug}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles/${slug}`, {
       cache: "no-store",
     });
 
