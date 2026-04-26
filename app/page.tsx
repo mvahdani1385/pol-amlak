@@ -74,7 +74,7 @@ export default async function SHOWaMLAKPage() {
         <div>
             <Header />
             <MainFilter />
-            <Link className="normBtn top-45 left-40 mt-5 m-auto w-[90%] md:w-[200px] h-[45px]" href={'/userPanel'}>یوزر پنل</Link>
+            {/* <Link className="normBtn top-45 left-40 mt-5 m-auto w-[90%] md:w-[200px] h-[45px]" href={'/userPanel'}>یوزر پنل</Link> */}
             <Categoris />
             <ShowRealestate />
             <Footer />
