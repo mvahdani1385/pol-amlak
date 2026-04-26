@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
+import { put } from '@vercel/blob';
 import path from 'path';
 
 export async function POST(request: NextRequest) {
@@ -24,6 +25,10 @@ export async function POST(request: NextRequest) {
 
         // ایجاد پوشه uploads/properties اگر وجود ندارد
         const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+
+        const blob = await put(file.name, file, {
+      access: 'public',
+    });
         
         try {
             await mkdir(uploadDir, { recursive: true });
