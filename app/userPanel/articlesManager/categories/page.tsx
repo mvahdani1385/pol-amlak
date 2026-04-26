@@ -43,7 +43,7 @@ function Categories() {
             return
         }
         try {
-            const response = await fetch('http://localhost:3000/api/articlesCategories', {
+            const response = await fetch('/api/articlesCategories', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

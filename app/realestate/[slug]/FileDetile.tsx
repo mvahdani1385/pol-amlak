@@ -122,7 +122,7 @@ function FileDetile({
 
   const handleShare = async () => {
     const textToShare = "این فایل رو ببین و برسی کن من که خیلی ازش خوشم اومد";
-    const urlToShare = `http://localhost:3000/realestate/${property.slug}`; // لینکی که می‌خواهید کاربر به اشتراک بگذارد
+    const urlToShare = `/realestate/${property.slug}`; // لینکی که می‌خواهید کاربر به اشتراک بگذارد
 
     if (navigator.share) {
       try {
