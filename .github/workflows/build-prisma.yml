@@ -38,6 +38,7 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
         env:
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy?schema=public"
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
 
       - name: Upload engines as artifact
