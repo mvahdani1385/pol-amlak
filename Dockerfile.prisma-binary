@@ -1,0 +1,23 @@
+FROM node:20-bookworm-slim
+
+WORKDIR /app
+
+# نصب Prisma در یک پروژه موقتی
+RUN npm init -y && \
+    npm install prisma@7.8.0 @prisma/client@7.8.0
+
+# ساخت فایل schema.prisma با binaryTarget مناسب
+RUN echo 'generator client {' > schema.prisma && \
+    echo '  provider = "prisma-client-js"' >> schema.prisma && \
+    echo '  binaryTargets = ["debian-openssl-3.0.x"]' >> schema.prisma && \
+    echo '}' >> schema.prisma && \
+    echo 'datasource db {' >> schema.prisma && \
+    echo '  provider = "postgresql"' >> schema.prisma && \
+    echo '  url = env("DATABASE_URL")' >> schema.prisma && \
+    echo '}' >> schema.prisma
+
+# اجرای prisma generate برای استخراج باینری‌ها
+RUN npx prisma generate
+
+# این دستور، خروجی رو از کانتینر بیرون میکشه
+CMD ["sh", "-c", "cp -r /app/node_modules/@prisma/engines /output"]

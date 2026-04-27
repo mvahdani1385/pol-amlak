@@ -7,20 +7,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install Prisma
-        run: |
-          npm init -y
-          npm install prisma@7.8.0 @prisma/client@7.8.0
+      - run: npm init -y
+      - run: npm install prisma@7.8.0 @prisma/client@7.8.0
 
-      - name: Create schema.prisma with correct binaryTarget and dummy DB
+      - name: Create Prisma schema
         run: |
           mkdir -p prisma
           cat > prisma/schema.prisma << 'EOF'
@@ -28,10 +23,14 @@ jobs:
             provider = "prisma-client-js"
             binaryTargets = ["debian-openssl-3.0.x"]
           }
-          
+
           datasource db {
             provider = "postgresql"
             url      = env("DATABASE_URL")
+          }
+
+          model Dummy {
+            id Int @id @default(autoincrement())
           }
           EOF
 
@@ -41,10 +40,7 @@ jobs:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
 
-      - name: List engines directory for debugging
-        run: ls -la node_modules/@prisma/engines/ || echo "Directory not found"
-
-      - name: Upload engines as artifact
+      - name: Upload engines artifact
         uses: actions/upload-artifact@v4
         with:
           name: prisma-engines-liara
