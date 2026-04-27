@@ -15,7 +15,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Create schema.prisma with correct binaryTarget
+      - name: Install Prisma
+        run: |
+          npm init -y
+          npm install prisma@7.8.0 @prisma/client@7.8.0
+
+      - name: Create schema.prisma with correct binaryTarget and dummy DB
         run: |
           mkdir -p prisma
           cat > prisma/schema.prisma << 'EOF'
@@ -30,16 +35,14 @@ jobs:
           }
           EOF
 
-      - name: Install Prisma
-        run: |
-          npm init -y
-          npm install prisma@7.8.0 @prisma/client@7.8.0
-
       - name: Generate Prisma Client
         run: npx prisma generate
         env:
-          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy?schema=public"
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
+
+      - name: List engines directory for debugging
+        run: ls -la node_modules/@prisma/engines/ || echo "Directory not found"
 
       - name: Upload engines as artifact
         uses: actions/upload-artifact@v4
