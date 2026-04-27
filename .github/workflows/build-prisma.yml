@@ -7,18 +7,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
-      - run: npm init -y
-      - run: npm install prisma@7.8.0 @prisma/client@7.8.0
-
-      - name: Create Prisma schema
+      - name: Install Prisma
         run: |
-          mkdir -p prisma
-          cat > prisma/schema.prisma << 'EOF'
+          npm init -y
+          npm install prisma@7.8.0 @prisma/client@7.8.0
+
+      - name: Create schema.prisma
+        run: |
+          cat > prisma/schema.prisma << EOF
           generator client {
             provider = "prisma-client-js"
             binaryTargets = ["debian-openssl-3.0.x"]
@@ -26,22 +30,23 @@ jobs:
 
           datasource db {
             provider = "postgresql"
-            url      = env("DATABASE_URL")
+            url = "postgresql://postgres:postgres@localhost:5432/mydb"
           }
 
-          model Dummy {
+          model User {
             id Int @id @default(autoincrement())
+            name String
           }
           EOF
 
       - name: Generate Prisma Client
         run: npx prisma generate
         env:
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
+          PRISMA_ENGINES_MIRROR: https://registry.npmmirror.com/-/binary/prisma
           PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING: 1
 
-      - name: Upload engines artifact
+      - name: Upload Engines
         uses: actions/upload-artifact@v4
         with:
-          name: prisma-engines-liara
+          name: prisma-engines
           path: node_modules/@prisma/engines/
